@@ -3,6 +3,19 @@ Creare un array con 15 numeri casuali, tenendo conto che l’array non dovrà co
 
 <?php
 
+$arr = [];
+
+while(count($arr) < 16){
+  $numRandom = rand(1, 100);
+  if(!in_array($numRandom, $arr)){
+    $arr[] = $numRandom;
+  } else {
+    $arr;
+  }
+}
+
+var_dump($arr);
+
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +27,6 @@ Creare un array con 15 numeri casuali, tenendo conto che l’array non dovrà co
   <title>Document</title>
 </head>
 <body>
-  
+
 </body>
 </html>

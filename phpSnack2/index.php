@@ -3,10 +3,21 @@ Passare come parametri GET name, mail e age e verificare (cercando i metodi che 
 
 <?php
 
-$name = $_GET['name'];
-$mail = $_GET['mail'];
-$age = $_GET['age'];
-
+  if(!empty($_GET['name']) && !empty($_GET['mail']) && !empty($_GET['age'])){
+    if (strlen($_GET['name']) < 3){
+      echo '<h4>Accesso negato</h4>';
+      echo '<h4>Il nome deve essere di minimo 3 lettere</h4>';
+    } else {
+      echo '<h4>Accesso riuscito</h4>';
+    }
+    // if (!function_exists('str_contains')) {
+    //   function str_contains($_GET['mail'], '.'){
+    //     return echo '<h4>La mail deve contenere un punto e la @</h4>';
+    //   }
+    // }
+    $age = $_GET['age'];
+  }
+  
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +29,22 @@ $age = $_GET['age'];
   <title>Document</title>
 </head>
 <body>
+
+  <form method="GET">
+    <div>
+      <label for="name">Nome</label>
+      <input type="text" name="name" required>
+    </div>
+    <div>
+      <label for="mail">Email</label>
+      <input type="email" name="mail" required>
+    </div>
+    <div>
+      <label for="age">Età</label>
+      <input type="number" name="age" min="1" max="100" required>
+    </div>
+    <button type="submit">Invia</button>
+  </form>
   
 </body>
 </html>
