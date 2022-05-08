@@ -3,20 +3,37 @@ Passare come parametri GET name, mail e age e verificare (cercando i metodi che 
 
 <?php
 
-  if(!empty($_GET['name']) && !empty($_GET['mail']) && !empty($_GET['age'])){
-    if (strlen($_GET['name']) < 3){
-      echo '<h4>Accesso negato</h4>';
-      echo '<h4>Il nome deve essere di minimo 3 lettere</h4>';
-    } else {
-      echo '<h4>Accesso riuscito</h4>';
-    }
-    // if (!function_exists('str_contains')) {
-    //   function str_contains($_GET['mail'], '.'){
-    //     return echo '<h4>La mail deve contenere un punto e la @</h4>';
-    //   }
-    // }
-    $age = $_GET['age'];
-  }
+$name = (!empty($_GET['name'])) ? $_GET['name'] : '';
+$mail = (!empty($_GET['mail'])) ? $_GET['mail'] : '';
+$age = (!empty($_GET['age'])) ? $_GET['age'] : '';
+
+$validationName = false;
+$validationMail = false;
+$validationAge = false;
+
+  if (strlen($name) < 3){
+    echo '<h4>Il nome deve essere di minimo 3 lettere</h4>';
+  } else {
+    $validationName = true;
+  };
+
+  if ( strpos( $mail, '@' ) == 0 && strpos( $mail, '.' ) == 0){
+    echo '<h4>La mail deve contenere almeno una @ e un punto</h4>';
+  } else {
+    $validationMail = true;
+  };
+
+  if ( !is_numeric( $age ) && $age < 0){
+    echo "<h4>L'età deve essere un numero e deve essere maggiore di 0</h4>";
+  } else {
+    $validationAge = true;
+  };
+
+  if( $validationName && $validationMail && $validationAge){
+    echo '<h4>Accesso riuscito</h4>';
+  } else {
+    echo '<h4>Accesso negato</h4>';
+  };
   
 ?>
 
@@ -41,7 +58,7 @@ Passare come parametri GET name, mail e age e verificare (cercando i metodi che 
     </div>
     <div>
       <label for="age">Età</label>
-      <input type="number" name="age" min="1" max="100" required>
+      <input type="text" name="age" required>
     </div>
     <button type="submit">Invia</button>
   </form>
